@@ -18,8 +18,6 @@ class Blockchain {
             previousBlockHash: previousBlockHash,
         }
 
-        this.newTransactoin = []
-
         this.chain.push(newBlock)
 
         return newBlock
@@ -29,6 +27,18 @@ class Blockchain {
 
     getLastBlock() {
         return this.chain[this.chain.length - 1]
+    }
+
+    // create new transactoin
+    createNewTransaction(amount, sender, recipient) {
+        const newTransaction = {
+            amount: amount,
+            sender: sender,
+            recipient: recipient,
+        }
+
+        this.newTransactoins.push(newTransaction)
+        return this.getLastBlock()["index"] + 1
     }
 }
 
