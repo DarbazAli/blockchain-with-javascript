@@ -1,19 +1,19 @@
 "use strict"
 
 import sha256 from "sha256"
-
 class Blockchain {
     constructor() {
         this.chain = []
         this.pendingTransactions = []
     }
 
-    // this method will create a new block
+    /*======================================
+    CREATE A NEW BLOCK
+    ======================================*/
     createNewBlock(nonce, previousBlockHash, hash) {
-        // block
         const newBlock = {
             index: this.chain.length + 1,
-            thimestamp: Date.now(),
+            timestamp: Date.now(),
             transactions: this.pendingTransactions,
             nonce: nonce,
             hash: hash,
@@ -25,13 +25,16 @@ class Blockchain {
         return newBlock
     }
 
-    // get last block
-
+    /*======================================
+    GET LAST BLOCK
+    ======================================*/
     getLastBlock() {
         return this.chain[this.chain.length - 1]
     }
 
-    // create new transactoin
+    /*======================================
+    CREATE NEW TRANSACTION
+    ======================================*/
     createNewTransaction(amount, sender, recipient) {
         const newTransaction = {
             amount: amount,
@@ -43,7 +46,9 @@ class Blockchain {
         return this.getLastBlock()["index"] + 1
     }
 
-    // hash a block
+    /*======================================
+    HASH A BLOCK
+    ======================================*/
     hashBlock(previousBlockHash, nonce, currentBlockData) {
         const hashStr = `${previousBlockHash}${nonce.toString()}${JSON.stringify(
             currentBlockData
