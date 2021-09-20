@@ -4,7 +4,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
   "dependencies": {
+    "express": "^4.17.1",
     "sha256": "^0.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }
