@@ -26,8 +26,9 @@ const currentBlockData = [
     },
 ]
 
-const nonce = 100
+const nonce = 20100
 
 bitcoin.createNewBlock(99, prevHash, "a1a2")
 
+// log(bitcoin.proofOfWork(prevHash, currentBlockData))
 log(bitcoin.hashBlock(prevHash, currentBlockData, nonce))

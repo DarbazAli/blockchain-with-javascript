@@ -1,4 +1,5 @@
 "use strict"
+const { log } = console
 
 import sha256 from "sha256"
 class Blockchain {
@@ -57,6 +58,23 @@ class Blockchain {
         const hash = sha256(hashStr)
 
         return hash
+    }
+
+    /*======================================
+    PROOF OF WORK
+    ======================================*/
+    proofOfWork(previousBlockHash, currentBlockData) {
+        let nonce = 0
+        let hash = this.hashBlock(previousBlockHash, currentBlockData, nonce)
+
+        // run the hashing func untill we get a hash that starts with '0000'
+        while (hash.substring(0, 4) !== "0000") {
+            nonce++
+            hash = this.hashBlock(previousBlockHash, currentBlockData, nonce)
+            log(hash)
+        }
+
+        return nonce
     }
 }
 
