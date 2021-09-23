@@ -15,4 +15,12 @@ const currentBlockData = [
 ]
 const nonce = 10
 
-log(bitcoin.hashBlock(previousBlockHash, currentBlockData, nonce))
+bitcoin.createNewBlock(100, "00", "00")
+
+bitcoin.createNewTransaction(100, "me", "you")
+
+bitcoin.createNewBlock(100, "00", "01")
+
+log(bitcoin)
+
+log(bitcon.hashBlock(previousBlockHash))

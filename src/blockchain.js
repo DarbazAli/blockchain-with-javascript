@@ -1,7 +1,7 @@
 "use strict"
 
 import sha256 from "sha256"
-// Blockchain Class
+// Blockchian Class
 class Blockchain {
     constructor() {
         this.chain = []
@@ -9,11 +9,11 @@ class Blockchain {
     }
 
     /* 
-    =================================================
+    ====================================================
     CREATE NEW BLOCK
-    =================================================
+    ====================================================
     */
-    createNewBlock(nonce, previousBlockHash, hash) {
+    createNewBlock = (nonce = 100, previousBlockHash = "", hash = "") => {
         const newBlock = {
             index: this.chain.length + 1,
             timestamp: Date.now(),
@@ -31,20 +31,18 @@ class Blockchain {
     }
 
     /* 
-    =================================================
+    ====================================================
     GET LAST BLOCK
-    =================================================
+    ====================================================
     */
-    getLastBlock() {
-        return this.chain[this.chain.length - 1]
-    }
+    getLastBlock = () => this.chain[this.chain.length - 1]
 
     /* 
-    =================================================
+    ====================================================
     CREATE NEW TRANSACTION
-    =================================================
+    ====================================================
     */
-    createNewTransaction(amount, sender, recipient) {
+    createNewTransaction = (amount = 0, sender = "", recipient = "") => {
         const newTransaction = {
             amount,
             sender,
@@ -52,21 +50,25 @@ class Blockchain {
         }
 
         this.pendingTransactions.push(newTransaction)
-
         return this.getLastBlock()["index"]
     }
 
     /* 
-    =================================================
-    HASHING A BLOCK
-    =================================================
+    ====================================================
+    HASH A BLOCK
+    ====================================================
     */
-    hashBlock = (previousBlockHash, currentBlockData, nonce) =>
-        sha256(`
+    hashBlock = (previousBlockHash = "", currentBlockData = {}, nonce = 0) => {
+        const dataAsString = `
         ${previousBlockHash}
-        ${nonce.toString()}
         ${JSON.stringify(currentBlockData)}
-       `)
+        ${nonce.toString()}
+       `
+
+        const hash = sha256(dataAsString)
+
+        return hash
+    }
 }
 
 export default Blockchain
